@@ -19,12 +19,17 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'uk.q3c.kaytee'
 
-version = "0.0.1.0"
 
 group='uk.q3c.krail'
 
+ext.guiceVersion = '4.0'
+
 kaytee {
-    baseVersion = "0.0.1.0"
+    baseVersion = "0.9.0.0"
+    generateChangeLog = false
+    unitTest{
+        enabled=false
+    }
 }
 
 bintray {
@@ -38,10 +43,15 @@ repositories {
 }
 
 dependencies {
+    compile "com.google.inject:guice:$guiceVersion"
+    //event bus
+    compile 'net.engio:mbassador:1.2.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testCompile 'cglib:cglib-nodep:3.2.0'
-    testCompile 'org.objenesis:objenesis:2.2'
+
 }
 sourceCompatibility = '1.8'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0.1'
+}
