@@ -98,24 +98,6 @@ interface BusMessage
 
 
 /**
- * Returns a bus instance.  It is expected that an implementation will return a "Global" bus by default, as that is what is
- * usually required, but an instance can be scoped to whatever is appropriate.
- *
- * @param T the message type
- */
-interface GeneralEventBusProvider<in T> {
-    fun get(): GeneralEventBus<T>
-}
-
-interface EventBusProvider : GeneralEventBusProvider<Any> {
-    override fun get(): EventBus
-}
-
-interface MessageBusProvider : GeneralEventBusProvider<BusMessage> {
-    override fun get(): MessageBus
-}
-
-/**
  * Wrapper for implementation specific message status object
  */
 data class MessageStatus(val status: Any)
